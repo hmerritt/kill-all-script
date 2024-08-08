@@ -5,13 +5,11 @@ param(
     [string]$ProcessNamePattern
 )
 
-# Function to get processes matching the pattern
 function Get-MatchingProcesses {
     param([string]$pattern)
     Get-WmiObject Win32_Process | Where-Object { $_.Name -clike "*${pattern}*" }
 }
 
-# Function to kill a process
 function Kill-Process($processId, $processName) {
     try {
         Stop-Process -Id $processId -Force -ErrorAction Stop
@@ -22,7 +20,6 @@ function Kill-Process($processId, $processName) {
     }
 }
 
-# Main script
 $matchingProcesses = Get-MatchingProcesses -pattern $ProcessNamePattern
 
 if ($matchingProcesses.Count -eq 0) {
