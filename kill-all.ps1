@@ -8,7 +8,7 @@ param(
 # Function to get processes matching the pattern
 function Get-MatchingProcesses {
     param([string]$pattern)
-    Get-WmiObject Win32_Process | Where-Object { $_.Name -like "*${pattern}*" }
+    Get-WmiObject Win32_Process | Where-Object { $_.Name -clike "*${pattern}*" }
 }
 
 # Function to kill a process
